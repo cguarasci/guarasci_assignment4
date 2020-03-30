@@ -1,11 +1,14 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class DuplicateRemover {
-	ArrayList<String> uniqueWords = new ArrayList<String>();
-	ArrayList<String> inputWords = new ArrayList<String>();
+	HashSet<String> uniqueWords = new HashSet<String>();
+	Set<String> inputWords = new HashSet<String>();
 	
 	public void remove (String dataFile) {
 		Scanner in = null;
@@ -19,20 +22,29 @@ public class DuplicateRemover {
 		}
 		
 		while (in.hasNext()) {
-			inputWords.add(in.next());
+			uniqueWords.add(in.next().toLowerCase());
 		}
 		
-		for (String word : inputWords) {
-			if(!uniqueWords.contains(word)) {
-				uniqueWords.add(word);
-			}
-		}
-		
-		System.out.println(uniqueWords);
+		in.close();
 	}
 	
 	public void write (String outputFile) {
+		BufferedWriter out;
 		
+		try {
+			FileWriter fileWriter = new FileWriter (outputFile);
+			out = new BufferedWriter(fileWriter);
+			
+			for (String word : uniqueWords) {
+				out.write(word);
+				out.newLine();
+			}
+			
+			out.close();
+		} 
+		catch (IOException e) {
+			System.out.println("An error has occured with the requested input file. Program terminated.");
+			System.exit(0);
+		}
 	}
-	
 }
