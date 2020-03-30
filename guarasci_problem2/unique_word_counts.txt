@@ -1,0 +1,8 @@
+The unique words in this file and their amount of appearances are: 
+how: 1
+a: 2
+could: 2
+wood: 4
+chuck: 4
+if: 1
+much: 1

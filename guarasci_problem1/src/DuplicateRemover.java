@@ -7,8 +7,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class DuplicateRemover {
-	HashSet<String> uniqueWords = new HashSet<String>();
-	Set<String> inputWords = new HashSet<String>();
+	Set<String> uniqueWords = new HashSet<String>();
 	
 	public void remove (String dataFile) {
 		Scanner in = null;
@@ -34,6 +33,8 @@ public class DuplicateRemover {
 		try {
 			FileWriter fileWriter = new FileWriter (outputFile);
 			out = new BufferedWriter(fileWriter);
+			
+			out.write("The unique words in this file are: \n");
 			
 			for (String word : uniqueWords) {
 				out.write(word);
